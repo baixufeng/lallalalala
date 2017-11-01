@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<style type="text/css">
+			td,th{
+				padding: 10px 20px;
+			}
+			p{
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div class="row">
+		  <div class="col-lg-6">
+		    <div class="input-group">
+		      <input  type="text" id="inp" class="form-control" placeholder="Search for...">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" id="btn" type="button">Go!</button>
+		      </span>
+		    </div>
+		  </div>
+		</div>
+		<p>本商店有卖：飞机、后悔药、脉动、特步、猪猪战袍、水杯、洗衣机、电饭锅</p>
+		<table border="1" cellspacing="" cellpadding="">
+			
+		</table>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			
+			$('#btn').click(function(){
+				var val=$('#inp').val()
+				$.ajax({
+					url:"http://localhost:3000",
+					type:"POST",
+					data:{'value':val},
+					success:function(e){
+						console.log(e)
+						var str=''
+						for(i in e){
+							str+=('<tr><td>'+e[i].name+'</td> <td>'+e[i].details+'</td> <td>'+e[i].price+'</td></tr>')
+						}
+						$('table').html(str)
+					}
+				
+				});
+			})
+			
+		})
+	</script>
+</html>
